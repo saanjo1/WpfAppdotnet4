@@ -106,7 +106,7 @@
     <Compile Include="Models\InvoiceItem.cs" />
     <Compile Include="Models\InvoiceItemModifier.cs" />
     <Compile Include="Models\Log.cs" />
-    <Compile Include="VIewModels\ArticleDisplayVM.cs" />
+    <Compile Include="ViewModels\ArticleDisplayVM.cs" />
     <Page Include="UserControl1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp48.VIewModels
+namespace WpfApp48.ViewModels
 {
     public class ArticleDisplayVM
     {
@@ -27,8 +27,6 @@ namespace WpfApp48.VIewModels
         OleDbCommand Command;
         private static ObservableCollection<ArticleDisplayVM> Articles = new ObservableCollection<ArticleDisplayVM>();
         PosSectorContext appContext = new PosSectorContext();
-
-
 
         public ExcelDataService()
         {

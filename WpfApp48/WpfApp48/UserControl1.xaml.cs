@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApp48.VIewModels;
+using WpfApp48.ViewModels;
 
 namespace WpfApp48
 {
@@ -64,7 +64,14 @@ namespace WpfApp48
             try
             {
                 var counter = _objExcelSer.ImportToDatabase();
-                MessageBox.Show(counter + " articles added to database.");
+                if(counter>0)
+                {
+                    MessageBox.Show(counter + " articles added to database.");
+                }
+                else
+                {
+                    MessageBox.Show("No articles were added.");
+                }
             }
             catch (Exception ex)
             {
