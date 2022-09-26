@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
+using System.Data.OleDb;
 using System.Linq;
 
 
@@ -7,7 +9,6 @@ namespace WpfApp48.Helpers
     public class Extensions
     {
        private static PosSectorContext appContext = new PosSectorContext();
-
 
         public static void ManageCategories()
         {
@@ -56,6 +57,24 @@ namespace WpfApp48.Helpers
                 decimalValue = decimal.Parse(value);
 
             return decimalValue;
+        }
+
+        public static OpenFileDialog CreateOFDialog()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = @"C:";
+            openFileDialog.Title = "Browse Excel Files";
+            openFileDialog.Filter = "Excel Worksheets|*.xls;*.xlsx;*.xlsm";
+
+           return openFileDialog;
+        }
+
+        public static string SetOleDbCon(string excelfile)
+        {
+            string con =
+      @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + excelfile + ";" +
+      @"Extended Properties='Excel 8.0;HDR=Yes;'";
+            return con;
         }
     }
 }

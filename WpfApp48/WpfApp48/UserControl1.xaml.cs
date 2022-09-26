@@ -32,9 +32,11 @@ namespace WpfApp48
 
         private void Prikaz_Click(object sender, RoutedEventArgs e)
         {
-            _objExcelSer = new ExcelDataService();
+            
+
             try
             {
+                _objExcelSer = new ExcelDataService();
                 dataGridArticle.ItemsSource = _objExcelSer.ReadFromExcel().Result;
             }
             catch (Exception ex)

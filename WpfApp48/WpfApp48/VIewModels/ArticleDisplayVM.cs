@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.OleDb;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,43 +32,66 @@ namespace WpfApp48.ViewModels
 
         public ExcelDataService()
         {
-            string excelfile = @"C:\Users\asus\OneDrive\Documents\ExcelFiles\Test.xls";
-            string con =
-         @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + excelfile + ";" +
-         @"Extended Properties='Excel 8.0;HDR=Yes;'";
-            conn = new OleDbConnection(con);
         }
 
 
         public async Task<ObservableCollection<ArticleDisplayVM>> ReadFromExcel()
         {
 
-            await conn.OpenAsync();
-            Command = new OleDbCommand();
-            Command.Connection = conn;
-            Command.CommandText = "select * from [DETAILS$]";
-
-
-            var Reader = await Command.ExecuteReaderAsync();
-
-            while (Reader.Read())
+            string excelfile = OpenDialog();
+            if (excelfile != null)
             {
-                Articles.Add(new ArticleDisplayVM()
+                try
                 {
-                    ID = Reader["ITEM"].ToString(),
-                    BarCode = Reader["BARCODE"].ToString(),
-                    ItemName = Reader["BARCODE"].ToString() + " " + Reader["ITEM"].ToString() + " "
-                    + Reader["prijevodi HRVATSKI"].ToString() + " " + Reader["COLOR_DESCRIPTION"].ToString() + " " + Reader["ITEM_SIZE"].ToString(),
-                    Gender = Reader["GENDER"].ToString(),
-                    So_Price = Reader["SO_PRICE"].ToString(),
-                    ItemSize = Reader["ITEM_SIZE"].ToString()
-                });
-            }
+                    var con = Helpers.Extensions.SetOleDbCon(excelfile);
+                    conn = new OleDbConnection(con);
 
-            Reader.Close();
-            conn.Close();
+
+                    await conn.OpenAsync();
+                    Command = new OleDbCommand();
+                    Command.Connection = conn;
+                    Command.CommandText = "select * from [DETAILS$]";
+
+
+                    var Reader = await Command.ExecuteReaderAsync();
+
+                    while (Reader.Read())
+                    {
+                        Articles.Add(new ArticleDisplayVM()
+                        {
+                            ID = Reader["ITEM"].ToString(),
+                            BarCode = Reader["BARCODE"].ToString(),
+                            ItemName = Reader["BARCODE"].ToString() + " " + Reader["ITEM"].ToString() + " "
+                            + Reader["prijevodi HRVATSKI"].ToString() + " " + Reader["COLOR_DESCRIPTION"].ToString() + " " + Reader["ITEM_SIZE"].ToString(),
+                            Gender = Reader["GENDER"].ToString(),
+                            So_Price = Reader["SO_PRICE"].ToString(),
+                            ItemSize = Reader["ITEM_SIZE"].ToString()
+                        });
+                    }
+
+                    Reader.Close();
+                    conn.Close();
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+
+            }
             return Articles;
         }
+
+        public string OpenDialog()
+        {
+            OpenFileDialog openFileDialog = Helpers.Extensions.CreateOFDialog();
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                return openFileDialog.FileName;
+            }
+            return null;
+        }
+
 
 
         public int ImportToDatabase()
