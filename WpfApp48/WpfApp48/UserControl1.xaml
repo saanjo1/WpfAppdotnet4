@@ -4,14 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp48"
-             mc:Ignorable="d" Height="1240" Width="1242">
-    <Grid Margin="0,0,-14,42">
+             mc:Ignorable="d" Height="500" Width="850">
+    <Grid Margin="20,20,20,20" HorizontalAlignment="Left">
         <Grid.RowDefinitions></Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1">
             <WrapPanel Margin="10" Height="22" Width="383">
-                <Button x:Name="Export" Content="Prikaz artikala"
+                <Button x:Name="Export" Content="Odaberi fajl"
                 Width="188" Click="Prikaz_Click"/>
-                <Button x:Name="Import"
+                <Button  x:Name="Import"
             Content="Import artikala" 
              Width="186" Click="Import_Click"/>
             </WrapPanel>
@@ -27,9 +27,9 @@
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <DataGrid Name="dataGridArticle" AutoGenerateColumns="False" ColumnWidth="*"  RowBackground="WhiteSmoke"  
-                  Background="white" Margin="10,47,0,0" Grid.ColumnSpan="2">
+                  Background="white" Margin="10,47,0,114" Grid.ColumnSpan="2">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="70"></DataGridTextColumn>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="90"></DataGridTextColumn>
                     <DataGridTextColumn Header="ItemName" Binding="{Binding ItemName}" Width="370"></DataGridTextColumn>
                     <DataGridTextColumn Header="ItemSize" Binding="{Binding ItemSize}" Width="70"></DataGridTextColumn>
                     <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="50"></DataGridTextColumn>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp48.Services;
 using WpfApp48.ViewModels;
 
 namespace WpfApp48
@@ -32,8 +33,6 @@ namespace WpfApp48
 
         private void Prikaz_Click(object sender, RoutedEventArgs e)
         {
-            
-
             try
             {
                 _objExcelSer = new ExcelDataService();
