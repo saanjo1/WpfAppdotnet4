@@ -59,14 +59,5 @@ namespace WpfApp48.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Browse excel files.
-        /// </summary>
-        internal static string TItle {
-            get {
-                return ResourceManager.GetString("TItle", resourceCulture);
-            }
-        }
     }
 }

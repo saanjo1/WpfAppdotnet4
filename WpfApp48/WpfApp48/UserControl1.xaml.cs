@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp48.Resources;
 using WpfApp48.Services;
 using WpfApp48.ViewModels;
 
@@ -23,8 +24,6 @@ namespace WpfApp48
     public partial class UserControl1 : UserControl
     {
         ExcelDataService _objExcelSer;
-        ArticleDisplayVM _article = new ArticleDisplayVM();
-        PosSectorContext appContext = new PosSectorContext();
 
         public UserControl1()
         {
@@ -67,11 +66,11 @@ namespace WpfApp48
                 var counter = _objExcelSer.ImportToDatabase();
                 if(counter>0)
                 {
-                    MessageBox.Show(counter + " articles added to database.");
+                    MessageBox.Show(counter + Translations.AddedArticlesMessage);
                 }
                 else
                 {
-                    MessageBox.Show("No articles were added.");
+                    MessageBox.Show(Translations.NoArticlesAdded);
                 }
             }
             catch (Exception ex)

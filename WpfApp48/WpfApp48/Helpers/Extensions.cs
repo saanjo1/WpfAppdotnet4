@@ -2,7 +2,7 @@
 using System;
 using System.Data.OleDb;
 using System.Linq;
-
+using WpfApp48.Resources;
 
 namespace WpfApp48.Helpers
 {
@@ -63,8 +63,8 @@ namespace WpfApp48.Helpers
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = @"C:";
-            openFileDialog.Title = "Browse Excel Files";
-            openFileDialog.Filter = "Excel Worksheets|*.xls;*.xlsx;*.xlsm";
+            openFileDialog.Title = Translations.OpenDialogTitle;
+            openFileDialog.Filter = Translations.OpenDialogFilter;
 
            return openFileDialog;
         }

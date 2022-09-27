@@ -7,6 +7,8 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using WpfApp48.Resources;
 using WpfApp48.ViewModels;
 
 namespace WpfApp48.Services
@@ -36,7 +38,7 @@ namespace WpfApp48.Services
                     await conn.OpenAsync();
                     Command = new OleDbCommand();
                     Command.Connection = conn;
-                    Command.CommandText = "select * from [DETAILS$]";
+                    Command.CommandText = Translations.SelectCommand;
 
 
                     var Reader = await Command.ExecuteReaderAsync();
@@ -64,6 +66,16 @@ namespace WpfApp48.Services
                 }
 
             }
+
+            if(Articles.Count > 0)
+            {
+                MessageBox.Show(Articles.Count + Translations.CountArticlesMessage);
+            }
+            else
+            {
+                MessageBox.Show(Translations.NoDataMessage);
+            }
+
             return Articles;
         }
 
@@ -80,7 +92,7 @@ namespace WpfApp48.Services
 
         public int ImportToDatabase()
         {
-            var culture = new CultureInfo("en-US");
+            var culture = new CultureInfo(Translations.CultureInfo);
             var counter = 0;
 
             for (int i = 0; i < Articles.Count(); i++)
