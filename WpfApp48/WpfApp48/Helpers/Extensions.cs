@@ -10,24 +10,35 @@ namespace WpfApp48.Helpers
     {
        private static PosSectorContext appContext = new PosSectorContext();
 
-        public static void ManageCategories()
+        public static Guid ManageCategories(string col)
         {
-            if (!appContext.Categories.Any())
+            var x = appContext.Categories.Where(x => x.Name == col).FirstOrDefault();
+
+            if (x == null)
             {
-                appContext.Categories.Add(new Category
+                Category category = new Category()
                 {
-                    Id = new Guid("59f06472-79f7-4fda-a2d4-f24f1eae6e1b"),
-                    Name = "default",
+                    Id = Guid.NewGuid(),
+                    Name = col,
                     Deleted = false,
-                    Order = 1
-                });
+                    Order = 1,
+                    Storage_Id = null
+                };
+                var id = category.Id;
+                appContext.Categories.Add(category);
                 appContext.SaveChanges();
+                return id;
             }
+            else
+            {
+                return x.Id;
+            }
+
         }
-        public static Guid ManageSubcategory(string gender)
+        public static Guid ManageSubcategory(string gender, string collection)
         {
-            var x = appContext.SubCategories.Where(x => x.Name == gender).FirstOrDefault();
-            ManageCategories();
+            SubCategory x = appContext.SubCategories.Where(x => x.Name == gender).FirstOrDefault();
+            var season = ManageCategories(collection);
             if (x == null)
             {
                 SubCategory subCategory = new SubCategory()
@@ -35,7 +46,7 @@ namespace WpfApp48.Helpers
                     Id = Guid.NewGuid(),
                     Name = gender,
                     Deleted = false,
-                    Category_Id = new Guid("59f06472-79f7-4fda-a2d4-f24f1eae6e1b")
+                    Category_Id = season
                 };
                 var id = subCategory.Id;
                 appContext.SubCategories.Add(subCategory);

@@ -52,6 +52,7 @@ namespace WpfApp48.Services
                             ItemName = Reader["BARCODE"].ToString() + " " + Reader["ITEM"].ToString() + " "
                             + Reader["prijevodi HRVATSKI"].ToString() + " " + Reader["COLOR_DESCRIPTION"].ToString() + " " + Reader["ITEM_SIZE"].ToString(),
                             Gender = Reader["GENDER"].ToString(),
+                            Collection = Reader["SEASON"].ToString(),
                             So_Price = Reader["SO_PRICE"].ToString(),
                             ItemSize = Reader["ITEM_SIZE"].ToString()
                         });
@@ -109,7 +110,7 @@ namespace WpfApp48.Services
                         Price = Helpers.Extensions.GetDecimal(Articles[i].So_Price),
                         BarCode = Articles[i].BarCode,
                         ArticleNumber = 123,
-                        SubCategory_Id = Helpers.Extensions.ManageSubcategory(Articles[i].Gender),
+                        SubCategory_Id = Helpers.Extensions.ManageSubcategory(Articles[i].Gender, Articles[i].Collection),
                         Deleted = false,
                         ReturnFee = 1,
                         Id = Guid.NewGuid(),
