@@ -84,6 +84,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Modal.xaml.cs">
+      <DependentUpon>Modal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Articles_yedek.cs" />
     <Compile Include="Models\Rule.cs" />
     <Compile Include="Models\RuleItem.cs" />
@@ -128,6 +131,10 @@
     <Compile Include="Models\InvoiceItemModifier.cs" />
     <Compile Include="Models\Log.cs" />
     <Compile Include="ViewModels\ArticleDisplayVM.cs" />
+    <Page Include="Modal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControl1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

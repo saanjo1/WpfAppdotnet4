@@ -15,14 +15,14 @@
             Content="Import artikala" 
              Width="186" Click="Import_Click"/>
             </WrapPanel>
-            <!--<WrapPanel Orientation="Horizontal"  Width="376" Height="23">
-                <Button x:Name="ImportCat"
-            Content="Uvoz artikala sa kategorijama"
-             Click="ImportCat_Click" Width="188"/>
-                <Button x:Name="ExportCat" Content="Izvoz artikala sa kategorijama"
+            <WrapPanel Orientation="Horizontal"  Width="376" Height="23">
+                <Button x:Name="MapData"
+            Content="Mapiraj podatke"
+             Click="MapData_Click" Width="188"/>
+                <!--<Button x:Name="ExportCat" Content="Izvoz artikala sa kategorijama"
                 Width="188" 
-                Click="ExportCat_Click"/>
-            </WrapPanel>-->
+                Click="ExportCat_Click"/>-->
+            </WrapPanel>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

@@ -23,7 +23,7 @@ namespace WpfApp48.Services
         public ExcelDataService()
         {
         }
-        public async Task<ObservableCollection<ArticleDisplayVM>> ReadFromExcel()
+        public async Task<ObservableCollection<ArticleDisplayVM>> ReadFromExcel(string ID, string ItemName, string ItemSize, string Gender, string Price, string Barcode)
         {
 
             string excelfile = OpenDialog();
@@ -47,14 +47,13 @@ namespace WpfApp48.Services
                     {
                         Articles.Add(new ArticleDisplayVM()
                         {
-                            ID = Reader["ITEM"].ToString(),
-                            BarCode = Reader["BARCODE"].ToString(),
-                            ItemName = Reader["BARCODE"].ToString() + " " + Reader["ITEM"].ToString() + " "
-                            + Reader["prijevodi HRVATSKI"].ToString() + " " + Reader["COLOR_DESCRIPTION"].ToString() + " " + Reader["ITEM_SIZE"].ToString(),
-                            Gender = Reader["GENDER"].ToString(),
-                            Collection = Reader["SEASON"].ToString(),
-                            So_Price = Reader["SO_PRICE"].ToString(),
-                            ItemSize = Reader["ITEM_SIZE"].ToString()
+                            ID = Reader[ID].ToString(),
+                            BarCode = Reader[Barcode].ToString(),
+                            ItemName = Reader[ItemName].ToString(),
+                            Gender = Reader[Gender].ToString(),
+                            collection1 = Reader["SEASON"].ToString(),
+                            So_Price = Reader[Price].ToString(),
+                            ItemSize = Reader[ItemSize].ToString()
                         });
                     }
 
@@ -110,7 +109,7 @@ namespace WpfApp48.Services
                         Price = Helpers.Extensions.GetDecimal(Articles[i].So_Price),
                         BarCode = Articles[i].BarCode,
                         ArticleNumber = 123,
-                        SubCategory_Id = Helpers.Extensions.ManageSubcategory(Articles[i].Gender, Articles[i].Collection),
+                        SubCategory_Id = Helpers.Extensions.ManageSubcategory(Articles[i].Gender, Articles[i].collection1),
                         Deleted = false,
                         ReturnFee = 1,
                         Id = Guid.NewGuid(),
