@@ -20,33 +20,28 @@ namespace WpfApp48
     /// </summary>
     public partial class Modal : Window
     {
-        public static List<string> columns;
-
-        public static string ID = String.Empty;
-        public static string ItemName = String.Empty;
-        public static string ItemSize = String.Empty;
-        public static string Barcode = String.Empty;
-        public static string Gender = String.Empty;
-        public static string Price = String.Empty;
+        public static ArticleDisplayVM columns;
 
         public Modal()
         {
             InitializeComponent();
         }
 
-        private void btnCloseClick(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
+        private void btnCloseClick(object sender, RoutedEventArgs e) =>
+    Close();
         private void btnSaveClick(object sender, RoutedEventArgs e)
         {
-            ID = Id.Text;
-            ItemName = itemime.Text;
-            ItemSize = itemsize.Text;
-            Barcode = barcode.Text;
-            Gender = gender.Text;
-            Price = price.Text;
+            columns = new ArticleDisplayVM
+            {
+                ID = Id.Text,
+                ItemName = itemime.Text,
+                ItemSize = itemsize.Text,
+                BarCode = barcode.Text,
+                CollectionCategory = CollectionCategory.Text,
+                Gender = gender.Text,
+                So_Price = price.Text
+            };
+            
 
             Close();
         }

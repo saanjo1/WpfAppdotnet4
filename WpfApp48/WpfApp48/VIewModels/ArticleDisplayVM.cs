@@ -21,7 +21,7 @@ namespace WpfApp48.ViewModels
         public string Gender { get; set; }
         public string BarCode { get; set; }
         public string So_Price { get; set; }
-        public string collection1 { get; set; }
+        public string CollectionCategory { get; set; }
     }
 }
 

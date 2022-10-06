@@ -4,37 +4,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp48"
-             mc:Ignorable="d" Height="500" Width="850">
-    <Grid Margin="20,20,20,20" HorizontalAlignment="Left">
+             mc:Ignorable="d" Height="800" Width="1024">
+    <Grid Margin="20,20,20,20" HorizontalAlignment="Left" Width="999">
         <Grid.RowDefinitions></Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1">
-            <WrapPanel Margin="10" Height="22" Width="383">
-                <Button x:Name="Export" Content="Odaberi fajl"
+            <WrapPanel Orientation="Vertical"  Width="190" Height="97">
+                <Button x:Name="btnExcelFile" Content="Odaberi fajl"
+                Width="188" Click="SelectExcelFile"/>
+                <Button x:Name="btnMapData"
+            Content="Mapiraj podatke"
+             Click="MapData_Click" Width="188"/>
+                <Button x:Name="btnDisplay" Content="Prikaz podataka"
                 Width="188" Click="Prikaz_Click"/>
-                <Button  x:Name="Import"
+                <Button  x:Name="btnImport"
             Content="Import artikala" 
              Width="186" Click="Import_Click"/>
             </WrapPanel>
-            <WrapPanel Orientation="Horizontal"  Width="376" Height="23">
-                <Button x:Name="MapData"
-            Content="Mapiraj podatke"
-             Click="MapData_Click" Width="188"/>
-                <!--<Button x:Name="ExportCat" Content="Izvoz artikala sa kategorijama"
-                Width="188" 
-                Click="ExportCat_Click"/>-->
-            </WrapPanel>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <DataGrid Name="dataGridArticle" AutoGenerateColumns="False" ColumnWidth="*"  RowBackground="WhiteSmoke"  
-                  Background="white" Margin="10,47,0,114" Grid.ColumnSpan="2">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="1090" Margin="0,0,-91,0">
+            <DataGrid x:Name="dataGridArticle" AutoGenerateColumns="False" ColumnWidth="*"  RowBackground="WhiteSmoke"  
+                  Background="white" Margin="10,127,0,4" RenderTransformOrigin="0.503,0.834" Width="933">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="90"></DataGridTextColumn>
-                    <DataGridTextColumn Header="ItemName" Binding="{Binding ItemName}" Width="370"></DataGridTextColumn>
-                    <DataGridTextColumn Header="ItemSize" Binding="{Binding ItemSize}" Width="70"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="50"></DataGridTextColumn>
-                    <DataGridTextColumn Header="BarCode" Binding="{Binding BarCode}" Width="100"></DataGridTextColumn>
-                    <DataGridTextColumn Header="So_Price" Binding="{Binding So_Price}" Width="100"></DataGridTextColumn>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="90"/>
+                    <DataGridTextColumn Header="ItemName" Binding="{Binding ItemName}" Width="370"/>
+                    <DataGridTextColumn Header="ItemSize" Binding="{Binding ItemSize}" Width="70"/>
+                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="50"/>
+                    <DataGridTextColumn Header="BarCode" Binding="{Binding BarCode}" Width="100"/>
+                    <DataGridTextColumn Header="So_Price" Binding="{Binding So_Price}" Width="100"/>
+                    <DataGridTextColumn Header="Collection" Binding="{Binding CollectionCategory}" Width="100"/>
                 </DataGrid.Columns>
             </DataGrid>
 

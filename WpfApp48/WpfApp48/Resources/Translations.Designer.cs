@@ -88,6 +88,15 @@ namespace WpfApp48.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occured while mapping data. Try again..
+        /// </summary>
+        internal static string MapErrorMessage {
+            get {
+                return ResourceManager.GetString("MapErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No articles were added..
         /// </summary>
         internal static string NoArticlesAdded {
@@ -97,7 +106,7 @@ namespace WpfApp48.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is no selected data..
+        ///   Looks up a localized string similar to An error occured when trying to catch data..
         /// </summary>
         internal static string NoDataMessage {
             get {

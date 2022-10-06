@@ -19,19 +19,40 @@ namespace WpfApp48.Services
         OleDbCommand Command;
         private static ObservableCollection<ArticleDisplayVM> Articles = new ObservableCollection<ArticleDisplayVM>();
         PosSectorContext appContext = new PosSectorContext();
+        public static string excelFile = null;
 
-        public ExcelDataService()
-        {
-        }
-        public async Task<ObservableCollection<ArticleDisplayVM>> ReadFromExcel(string ID, string ItemName, string ItemSize, string Gender, string Price, string Barcode)
-        {
 
-            string excelfile = OpenDialog();
-            if (excelfile != null)
+        public ArticleDisplayVM ManageModal(Modal modal)
+        {
+            if(Modal.columns == null)
             {
+                MessageBox.Show(Translations.MapErrorMessage);
+                return null;
+            }
+
+            ArticleDisplayVM columns = new ArticleDisplayVM
+            {
+                ID = Modal.columns.ID,
+                ItemName = Modal.columns.ItemName,
+                ItemSize = Modal.columns.ItemSize,
+                So_Price = Modal.columns.So_Price,
+                Gender = Modal.columns.Gender,
+                BarCode = Modal.columns.BarCode,
+                CollectionCategory = Modal.columns.CollectionCategory
+            };
+            return columns;
+
+
+        }
+
+        public async Task<ObservableCollection<ArticleDisplayVM>> ReadFromExcel(ArticleDisplayVM viewModel)
+        {
+            if (excelFile == null)
+                return null;
+         
                 try
                 {
-                    var con = Helpers.Extensions.SetOleDbCon(excelfile);
+                    var con = Helpers.Extensions.SetOleDbCon(excelFile);
                     conn = new OleDbConnection(con);
 
 
@@ -47,13 +68,13 @@ namespace WpfApp48.Services
                     {
                         Articles.Add(new ArticleDisplayVM()
                         {
-                            ID = Reader[ID].ToString(),
-                            BarCode = Reader[Barcode].ToString(),
-                            ItemName = Reader[ItemName].ToString(),
-                            Gender = Reader[Gender].ToString(),
-                            collection1 = Reader["SEASON"].ToString(),
-                            So_Price = Reader[Price].ToString(),
-                            ItemSize = Reader[ItemSize].ToString()
+                            ID = Reader[viewModel.ID].ToString(),
+                            BarCode = Reader[viewModel.BarCode].ToString(),
+                            ItemName = Reader[viewModel.ItemName].ToString(),
+                            Gender = Reader[viewModel.Gender].ToString(),
+                            CollectionCategory = Reader[viewModel.CollectionCategory].ToString(),
+                            So_Price = Reader[viewModel.So_Price].ToString(),
+                            ItemSize = Reader[viewModel.ItemSize].ToString()
                         });
                     }
 
@@ -62,10 +83,8 @@ namespace WpfApp48.Services
                 }
                 catch (Exception e)
                 {
-                    throw;
+                    
                 }
-
-            }
 
             if(Articles.Count > 0)
             {
@@ -79,15 +98,16 @@ namespace WpfApp48.Services
             return Articles;
         }
 
-        public string OpenDialog()
+        public bool OpenDialog()
         {
             OpenFileDialog openFileDialog = Helpers.Extensions.CreateOFDialog();
 
             if (openFileDialog.ShowDialog() == true)
             {
-                return openFileDialog.FileName;
+                excelFile= openFileDialog.FileName;
+                return true;
             }
-            return null;
+            return false;
         }
 
         public int ImportToDatabase()
@@ -109,7 +129,7 @@ namespace WpfApp48.Services
                         Price = Helpers.Extensions.GetDecimal(Articles[i].So_Price),
                         BarCode = Articles[i].BarCode,
                         ArticleNumber = 123,
-                        SubCategory_Id = Helpers.Extensions.ManageSubcategory(Articles[i].Gender, Articles[i].collection1),
+                        SubCategory_Id = Helpers.Extensions.ManageSubcategory(Articles[i].Gender, Articles[i].CollectionCategory),
                         Deleted = false,
                         ReturnFee = 1,
                         Id = Guid.NewGuid(),

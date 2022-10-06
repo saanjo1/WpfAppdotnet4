@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp48"
         mc:Ignorable="d"
-        Title="Mapiraj podatke" Height="299" Width="487">
+        Title="Mapiraj podatke" Height="319" Width="487">
     <Grid Margin="50,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="69"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -34,8 +35,10 @@
         <TextBox Name="barcode" Grid.Row="5" Grid.Column="1" Margin="0,5,175,5"/>
         <Label Grid.Row="6">Price:</Label>
         <TextBox Name="price" Grid.Row="6" Grid.Column="1" Margin="0,5,175,5"/>
-        <Button Grid.Row="7" Name="btnSaveData" Click="btnSaveClick" Content="Save" RenderTransformOrigin="-0.34,0.714" Height="21" Margin="19,10,284,-8" VerticalAlignment="Top" Grid.ColumnSpan="2" />
-        <Button Grid.Row="7" Name="btnCloseData" Click="btnCloseClick" Content="Close" Margin="94,10,138,-7" Grid.Column="1" RenderTransformOrigin="0.756,0.714" />
+        <Label Grid.Row="7">Collection:</Label>
+        <TextBox Name="CollectionCategory" Grid.Row="7" Grid.Column="1" Margin="0,5,175,5"/>
+        <Button Grid.Row="8" Name="btnSaveData" Click="btnSaveClick" Content="Save" RenderTransformOrigin="-0.34,0.714" Height="21" Margin="19,10,284,-8" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+        <Button Grid.Row="8" Name="btnCloseData" Click="btnCloseClick" Content="Close" Margin="94,10,138,-7" Grid.Column="1" RenderTransformOrigin="0.756,0.714" />
     </Grid>
 
 </Window>

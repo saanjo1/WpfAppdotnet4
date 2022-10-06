@@ -23,34 +23,25 @@ namespace WpfApp48
     /// </summary>
     public partial class UserControl1 : UserControl
     {
-        ExcelDataService _objExcelSer;
+        public static ExcelDataService _objExcelSer;
+        public static string excelFile;
 
-        public List<string> columns { get; set; }
-
-        public static string ID = String.Empty;
-        public static string ItemName = String.Empty;
-        public static string ItemSize = String.Empty;
-        public static string Barcode = String.Empty;
-        public static string Gender = String.Empty;
-        public static string Price = String.Empty;
-
+        public static ArticleDisplayVM columns { get; set; }
 
         public UserControl1()
         {
             InitializeComponent();
+            dataGridArticle.Visibility = Visibility.Hidden;
+            _objExcelSer = new ExcelDataService();
         }
-        private void Window_ContentRendered(object sender, EventArgs e)
-        {
-            dataGridArticle.SelectAll();
-            dataGridArticle.Focus();
-        }
+
 
         private void Prikaz_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                _objExcelSer = new ExcelDataService();
-                dataGridArticle.ItemsSource = _objExcelSer.ReadFromExcel(ID, ItemName,ItemSize, Gender,Price,Barcode).Result;
+                dataGridArticle.ItemsSource = _objExcelSer.ReadFromExcel(columns).Result;
+                dataGridArticle.Visibility = Visibility.Visible;
             }
             catch (Exception ex)
             {
@@ -65,15 +56,21 @@ namespace WpfApp48
 
         private void MapData_Click(object sender, RoutedEventArgs e)
         {
-            Modal modal = new Modal();
-            modal.ShowDialog();
+            try
+            {
+                Modal modal = new Modal();
+                modal.ShowDialog();
 
-            ID = Modal.ID;
-            ItemName = Modal.ItemName;
-            ItemSize = Modal.ItemSize;
-            Gender = Modal.Gender;
-            Barcode = Modal.Barcode;
-            Price = Modal.Price;
+                var columnItems = _objExcelSer.ManageModal(modal);
+               if (columnItems!=null);
+                columns = columnItems;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void ExportCat_Click(object sender, RoutedEventArgs en)
@@ -83,11 +80,10 @@ namespace WpfApp48
 
         private void Import_Click(object sender, RoutedEventArgs e)
         {
-            _objExcelSer = new ExcelDataService();
             try
             {
                 var counter = _objExcelSer.ImportToDatabase();
-                if(counter>0)
+                if (counter > 0)
                 {
                     MessageBox.Show(counter + Translations.AddedArticlesMessage);
                 }
@@ -100,6 +96,13 @@ namespace WpfApp48
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void SelectExcelFile(object sender, RoutedEventArgs e)
+        {
+            bool excelFile = _objExcelSer.OpenDialog();
+            if (!excelFile)
+                MessageBox.Show("Try again.");
         }
     }
 }

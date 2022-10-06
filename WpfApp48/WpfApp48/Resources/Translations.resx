@@ -126,11 +126,14 @@
   <data name="CultureInfo" xml:space="preserve">
     <value>en-US</value>
   </data>
+  <data name="MapErrorMessage" xml:space="preserve">
+    <value>An error occured while mapping data. Try again.</value>
+  </data>
   <data name="NoArticlesAdded" xml:space="preserve">
     <value>No articles were added.</value>
   </data>
   <data name="NoDataMessage" xml:space="preserve">
-    <value>There is no selected data.</value>
+    <value>An error occured when trying to catch data.</value>
   </data>
   <data name="OpenDialogFilter" xml:space="preserve">
     <value>Excel Worksheets|*.xls;*.xlsx;*.xlsm</value>

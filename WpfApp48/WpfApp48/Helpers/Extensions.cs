@@ -3,6 +3,7 @@ using System;
 using System.Data.OleDb;
 using System.Linq;
 using WpfApp48.Resources;
+using WpfApp48.ViewModels;
 
 namespace WpfApp48.Helpers
 {
@@ -58,6 +59,8 @@ namespace WpfApp48.Helpers
                 return x.Id;
             }
         }
+
+       
 
         public static decimal GetDecimal(string value)
         {
