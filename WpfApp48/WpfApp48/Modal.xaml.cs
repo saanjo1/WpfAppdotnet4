@@ -27,7 +27,7 @@ namespace WpfApp48
             InitializeComponent();
         }
 
-        private void btnCloseClick(object sender, RoutedEventArgs e) =>
+        private void closeButton_Click(object sender, RoutedEventArgs e) =>
     Close();
         private void btnSaveClick(object sender, RoutedEventArgs e)
         {

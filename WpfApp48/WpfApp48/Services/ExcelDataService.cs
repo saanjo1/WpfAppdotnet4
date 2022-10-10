@@ -47,8 +47,9 @@ namespace WpfApp48.Services
 
         public async Task<ObservableCollection<ArticleDisplayVM>> ReadFromExcel(ArticleDisplayVM viewModel)
         {
-            if (excelFile == null)
+            if (excelFile == null || viewModel == null)
                 return null;
+            
          
                 try
                 {
@@ -141,6 +142,12 @@ namespace WpfApp48.Services
             appContext.SaveChanges();
             return counter;
         }
+
+
+        //public async Task<Rule> RuleAsync()
+        //{
+
+        //}
 
     }
 }

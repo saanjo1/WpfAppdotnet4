@@ -104,5 +104,10 @@ namespace WpfApp48
             if (!excelFile)
                 MessageBox.Show("Try again.");
         }
+
+        private void addDiscount_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
