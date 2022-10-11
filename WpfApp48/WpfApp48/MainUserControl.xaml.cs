@@ -19,24 +19,54 @@ using WpfApp48.ViewModels;
 namespace WpfApp48
 {
     /// <summary>
-    /// Interaction logic for UserControl1.xaml
+    /// Interaction logic for MainUserControl.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class MainUserControl : UserControl
     {
         public static ExcelDataService _objExcelSer;
         public static string excelFile;
 
         public static ArticleDisplayVM columns { get; set; }
 
-        public UserControl1()
+
+        public MainUserControl()
         {
             InitializeComponent();
             dataGridArticle.Visibility = Visibility.Hidden;
             _objExcelSer = new ExcelDataService();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
 
-        private void Prikaz_Click(object sender, RoutedEventArgs e)
+        }
+
+        private void uploadFile_Click(object sender, RoutedEventArgs e)
+        {
+            bool excelFile = _objExcelSer.OpenDialog();
+            if (!excelFile)
+                MessageBox.Show("Try again.");
+        }
+
+        private void mapData_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Modal modal = new Modal();
+                modal.ShowDialog();
+
+                var columnItems = _objExcelSer.ManageModal(modal);
+                if (columnItems != null)
+                 columns = columnItems;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void displayData_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -49,36 +79,7 @@ namespace WpfApp48
             }
         }
 
-        private void Export_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MapData_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Modal modal = new Modal();
-                modal.ShowDialog();
-
-                var columnItems = _objExcelSer.ManageModal(modal);
-               if (columnItems!=null);
-                columns = columnItems;
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-        }
-
-        private void ExportCat_Click(object sender, RoutedEventArgs en)
-        {
-
-        }
-
-        private void Import_Click(object sender, RoutedEventArgs e)
+        private void importToDatabase_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -96,18 +97,6 @@ namespace WpfApp48
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void SelectExcelFile(object sender, RoutedEventArgs e)
-        {
-            bool excelFile = _objExcelSer.OpenDialog();
-            if (!excelFile)
-                MessageBox.Show("Try again.");
-        }
-
-        private void addDiscount_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -34,14 +34,6 @@ namespace WpfApp48.UserControls
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(DetailCard));
 
 
-        public string Time
-        {
-            get { return (string)GetValue(TimeProperty); }
-            set { SetValue(TimeProperty, value); }
-        }
-
-        public static readonly DependencyProperty TimeProperty = DependencyProperty.Register("Time", typeof(string), typeof(DetailCard));
-
 
         public string Number
         {

@@ -2,8 +2,30 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WpfApp48"
-             StartupUri="MainWindow1.xaml">
+             StartupUri="MainUserControl.xaml">
     <Application.Resources>
+
+        <Style x:Key="buttonCard" TargetType="Button">
+            <Setter Property="Background" Value="#8fbc8f" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="7">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 1"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#8fbc8f" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        
+        
          
     </Application.Resources>
 </Application>

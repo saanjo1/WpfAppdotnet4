@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp48.UserControls"
              mc:Ignorable="d" 
-             Name="cardcard" Foreground="#ffffff">
+             Name="detailCard" Foreground="#ffffff">
     <Border Background="DarkSeaGreen" CornerRadius="7" Margin="30 4" BorderThickness="1">
         <Border.Style>
             <Style TargetType="Border">
@@ -40,7 +40,6 @@
 
             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                 <TextBlock Text="{Binding ElementName=detailCard,Path=Title}" FontSize="14"/>
-                <TextBlock Text="{Binding ElementName=detailCard,Path=Time}" FontSize="11" FontWeight="Light" Margin="0 3 0 0"/>
             </StackPanel>
 
             <Border Grid.Column="2" CornerRadius="50" Width="25" Height="25" Background="SeaGreen">

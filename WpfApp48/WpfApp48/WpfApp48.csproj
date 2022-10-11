@@ -93,8 +93,8 @@
       <DependentUpon>Discounts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Extensions.cs" />
-    <Compile Include="MainWindow1.xaml.cs">
-      <DependentUpon>MainWindow1.xaml</DependentUpon>
+    <Compile Include="MainUserControl.xaml.cs">
+      <DependentUpon>MainUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modal.xaml.cs">
       <DependentUpon>Modal.xaml</DependentUpon>
@@ -122,9 +122,6 @@
     <Compile Include="UserControls\DetailCard.xaml.cs">
       <DependentUpon>DetailCard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -151,7 +148,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow1.xaml">
+    <Page Include="MainUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,10 +157,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\DetailCard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\UserControl1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,7 +214,16 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
+    <Resource Include="Images\eMap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\eIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\eDisplay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\eDatabase.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
