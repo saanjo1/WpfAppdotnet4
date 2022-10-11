@@ -12,8 +12,8 @@ namespace WpfApp48.ViewModels
         public string Value { get; set; }
         public DateTime validFrom { get; set; }
         public DateTime validTo { get; set; }
-        public bool isExecuted { get; set; }
-        public bool isActive { get; set; }
+        public bool? isExecuted { get; set; }
+        public bool? isActive { get; set; }
         public string Type { get; set; }
     }
 }

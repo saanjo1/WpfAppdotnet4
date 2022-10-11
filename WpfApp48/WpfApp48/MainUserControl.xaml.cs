@@ -27,6 +27,7 @@ namespace WpfApp48
         public static string excelFile;
 
         public static ArticleDisplayVM columns { get; set; }
+        public static DiscountDisplayVM discounts { get; set; }
 
 
         public MainUserControl()
@@ -92,6 +93,24 @@ namespace WpfApp48
                 {
                     MessageBox.Show(Translations.NoArticlesAdded);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void generateDiscount_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Discounts modal = new Discounts();
+                modal.ShowDialog();
+
+                var discountItems = _objExcelSer.ManageDiscount(modal);
+                if (discountItems != null)
+                    discounts = discountItems;
+
             }
             catch (Exception ex)
             {

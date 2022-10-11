@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp48"
         mc:Ignorable="d"
-        Title="Mapiraj podatke" Height="319" Width="487">
+        Title="Discounts" Height="319" Width="487">
     <Grid Margin="50,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="69"/>
@@ -22,23 +22,21 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Margin="0,0,-78,10" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="497" RenderTransformOrigin="0.557,0.444">Odaberi kolone iz fajla koje želiš spasiti u već postojeće tabele u DB</Label>
-        <Label Grid.Row="1">Id:</Label>
-        <TextBox Name="Id" Grid.Row="1" Grid.Column="1" Margin="0,5,175,5" />
-        <Label Grid.Row="2">Name:</Label>
-        <TextBox Name="discountName" Grid.Row="2" Grid.Column="1" Margin="0,5,175,5"/>
-        <Label Grid.Row="3">Valid from:</Label>
-        <TextBox Name="validFrom" Grid.Row="3" Grid.Column="1" AcceptsReturn="True" Margin="0,5,175,5"/>
-        <Label Grid.Row="4">Valid to:</Label>
-        <TextBox Name="validTo" Grid.Row="4" Grid.Column="1" Margin="0,5,175,5"/>
-        <Label Grid.Row="5">Executed:</Label>
-        <TextBox Name="Executed" Grid.Row="5" Grid.Column="1" Margin="0,5,175,5"/>
-        <Label Grid.Row="6">Active:</Label>
-        <TextBox Name="Active" Grid.Row="6" Grid.Column="1" Margin="0,5,175,5"/>
-        <Label Grid.Row="7">Type:</Label>
-        <TextBox Name="type" Grid.Row="7" Grid.Column="1" Margin="0,5,175,5"/>
-        <Button Grid.Row="8" Name="btnSaveDiscount" Click="btnSaveDiscount_Click" Content="Save" RenderTransformOrigin="-0.34,0.714" Height="21" Margin="19,10,284,-8" VerticalAlignment="Top" Grid.ColumnSpan="2" />
-        <Button Grid.Row="8" Name="btnCloseDiscount" Click="btnCloseDiscount_Click" Content="Close" Margin="94,10,138,-7" Grid.Column="1" RenderTransformOrigin="0.756,0.714" />
+        <Label Grid.Row="0" Margin="0,0,-78,10" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="497" FontWeight="SemiBold" FontSize="16">Generate new discount</Label>
+        <Label Grid.Row="1">Name:</Label>
+        <TextBox Name="discountName" Grid.Row="1" Grid.Column="1" Margin="0,5,175,5"/>
+        <Label Grid.Row="2">Valid from:</Label>
+        <DatePicker Name="validFrom" Grid.Row="2" Grid.Column="1" Margin="0,5,175,5"/>
+        <Label Grid.Row="3">Valid to:</Label>
+        <DatePicker Name="validTo" Grid.Row="3" Grid.Column="1" Margin="0,5,175,5"/>
+        <Label Grid.Row="4">Executed:</Label>
+        <CheckBox Name="Executed" Grid.Row="4" Grid.Column="1" Margin="0,5,175,5"/>
+        <Label Grid.Row="5">Active:</Label>
+        <CheckBox Name="Active" Grid.Row="5" Grid.Column="1" Margin="0,5,175,5"/>
+        <Label Grid.Row="6">Type:</Label>
+        <TextBox Name="type" Grid.Row="6" Grid.Column="1" Margin="0,5,175,5"/>
+        <Button Grid.Row="7" Name="btnSaveDiscount" Click="btnSaveDiscount_Click" Content="Save" RenderTransformOrigin="-0.34,0.714" Height="21" Margin="19,10,284,-8" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+        <Button Grid.Row="7" Name="btnCloseDiscount" Click="btnCloseDiscount_Click" Content="Close" Margin="94,10,138,-7" Grid.Column="1" RenderTransformOrigin="0.756,0.714" />
     </Grid>
 
 </Window>

@@ -42,6 +42,29 @@ namespace WpfApp48.Services
             };
             return columns;
 
+        }
+
+
+        public DiscountDisplayVM ManageDiscount(Discounts modal)
+        {
+            if (Discounts.viewmodel == null)
+            {
+                MessageBox.Show(Translations.MapErrorMessage);
+                return null;
+            }
+
+            DiscountDisplayVM rule = new DiscountDisplayVM
+            {
+                Id = Discounts.viewmodel.Id,
+                Value = Discounts.viewmodel.Value,
+                Type = Discounts.viewmodel.Type,
+                isActive = Discounts.viewmodel.isActive,
+                isExecuted = Discounts.viewmodel.isExecuted,
+                validFrom = Discounts.viewmodel.validFrom,
+                validTo = Discounts.viewmodel.validTo
+            };
+            return rule;
+
 
         }
 
@@ -141,6 +164,24 @@ namespace WpfApp48.Services
             }
             appContext.SaveChanges();
             return counter;
+        }
+
+        public void SaveDiscountToDatabase(DiscountDisplayVM viewModel)
+        {
+            Rule rule = new Rule
+            {
+                Id = viewModel.Id,
+                Active = (bool)viewModel.isActive,
+                IsExecuted = (bool)viewModel.isExecuted,
+                ValidFrom = viewModel.validFrom,
+                ValidTo = viewModel.validTo,
+                Type = viewModel.Type,
+                Name = viewModel.Value,
+                Taxes = null
+            };
+
+            appContext.Rules.Add(rule);
+            appContext.SaveChanges();
         }
 
 

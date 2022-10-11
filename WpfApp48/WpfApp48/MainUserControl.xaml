@@ -43,6 +43,9 @@
                     <Button Style="{StaticResource buttonCard}" Click="importToDatabase_Click">
                         <uc:DetailCard Title="Import to database" Number="4" Image="/Images/eDatabase.png" IsActive="False"/>
                     </Button>
+                    <Button Style="{StaticResource buttonCard}" Click="generateDiscount_Click">
+                        <uc:DetailCard Title="Generate new discount" Number="5" Image="/Images/eDiscount.png" IsActive="False"/>
+                    </Button>
                 </StackPanel>
             </Border>
             <Border Grid.Row="2" Grid.Column="0">

@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp48.Services;
+using WpfApp48.ViewModels;
 
 namespace WpfApp48
 {
@@ -19,14 +21,29 @@ namespace WpfApp48
     /// </summary>
     public partial class Discounts : Window
     {
+        public static DiscountDisplayVM viewmodel;
+        public static ExcelDataService _objDataService;
         public Discounts()
         {
             InitializeComponent();
+            _objDataService = new ExcelDataService();
         }
 
         private void btnSaveDiscount_Click(object sender, RoutedEventArgs e)
         {
+            viewmodel = new DiscountDisplayVM
+            {
+                Id = Guid.NewGuid(),
+                Value = discountName.Text,
+                Type = type.Text,
+                isActive = Active.IsChecked,
+                isExecuted = Executed.IsChecked,
+                validFrom = validFrom.SelectedDate.Value,
+                validTo = validTo.SelectedDate.Value
+            };
 
+            if (viewmodel != null)
+                _objDataService.SaveDiscountToDatabase(viewmodel);
         }
 
         private void btnCloseDiscount_Click(object sender, RoutedEventArgs e)
