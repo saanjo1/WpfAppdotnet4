@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.OleDb;
@@ -32,7 +33,7 @@ namespace WpfApp48.Services
 
             ArticleDisplayVM columns = new ArticleDisplayVM
             {
-                ID = Modal.columns.ID,
+                ID = Guid.NewGuid(),
                 ItemName = Modal.columns.ItemName,
                 ItemSize = Modal.columns.ItemSize,
                 So_Price = Modal.columns.So_Price,
@@ -92,7 +93,7 @@ namespace WpfApp48.Services
                     {
                         Articles.Add(new ArticleDisplayVM()
                         {
-                            ID = Reader[viewModel.ID].ToString(),
+                            ID = Guid.NewGuid(),
                             BarCode = Reader[viewModel.BarCode].ToString(),
                             ItemName = Reader[viewModel.ItemName].ToString(),
                             Gender = Reader[viewModel.Gender].ToString(),
@@ -120,6 +121,31 @@ namespace WpfApp48.Services
             }
 
             return Articles;
+        }
+
+        public void AddDiscountToArticle(List<ArticleDisplayVM> temp, string discName)
+        {
+            Rule disc = appContext.Rules.Where(x => x.Type == discName).FirstOrDefault();
+
+
+            for (int i = 0; i < temp.Count; i++)
+            {
+                var id = appContext.RuleItems.Where(x => x.Article_Id == temp[i].ID).FirstOrDefault();
+                if(id == null)
+                {
+                    RuleItem ruleItem = new RuleItem()
+                    {
+                        Id = Guid.NewGuid(),
+                        Article_Id = temp[i].ID,
+                        Rule_Id = disc.Id,
+                        NewPrice = 0
+                    };
+                    appContext.RuleItems.Add(ruleItem);
+                }
+            }
+
+            appContext.SaveChanges();
+            MessageBox.Show("Successfully saved.");
         }
 
         public bool OpenDialog()
@@ -156,7 +182,7 @@ namespace WpfApp48.Services
                         SubCategory_Id = Helpers.Extensions.ManageSubcategory(Articles[i].Gender, Articles[i].CollectionCategory),
                         Deleted = false,
                         ReturnFee = 1,
-                        Id = Guid.NewGuid(),
+                        Id = Articles[i].ID,
                         Order = 1
                     });
                 }
@@ -183,13 +209,6 @@ namespace WpfApp48.Services
             appContext.Rules.Add(rule);
             appContext.SaveChanges();
         }
-
-
-        //public async Task<Rule> RuleAsync()
-        //{
-
-        //}
-
     }
 }
 

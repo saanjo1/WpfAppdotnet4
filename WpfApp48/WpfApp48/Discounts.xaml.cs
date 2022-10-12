@@ -48,7 +48,7 @@ namespace WpfApp48
 
         private void btnCloseDiscount_Click(object sender, RoutedEventArgs e)
         {
-
+            Close();
         }
     }
 }

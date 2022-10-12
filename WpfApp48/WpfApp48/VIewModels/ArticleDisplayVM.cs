@@ -13,7 +13,7 @@ namespace WpfApp48.ViewModels
 {
     public class ArticleDisplayVM
     {
-        public string ID { get; set; }
+        public Guid ID { get; set; }
         public string ItemName { get; set; }
         public string Prijevodi { get; set; }
         public string ColorDescription { get; set; }

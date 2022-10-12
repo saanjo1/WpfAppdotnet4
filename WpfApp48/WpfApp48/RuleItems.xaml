@@ -1,0 +1,26 @@
+﻿<Window x:Class="WpfApp48.RuleItems"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp48"
+        mc:Ignorable="d"
+        Title="Discounts" Height="150" Width="400">
+    <Grid Margin="50,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="69"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0">Choose discount to connect with selected rows:</Label>
+        <Label Grid.Row="1">Discount:</Label>
+        <TextBox Name="discount" Grid.Row="1" Margin="63,5,24,5" RenderTransformOrigin="0.5,0.5"/>
+        <Button Grid.Row="2" Name="btnSaveDiscount" Click="btnSaveItem_Click" Content="Save" RenderTransformOrigin="-0.34,0.714" Height="30" Margin="74,26,137,-21" VerticalAlignment="Top" />
+        <Button Grid.Row="2" Name="btnCloseDiscount" Click="btnCloseItem_Click" Content="Close" Margin="147,26,67,-21" RenderTransformOrigin="0.756,0.714" />
+    </Grid>
+
+</Window>

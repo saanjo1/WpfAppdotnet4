@@ -22,6 +22,8 @@
             <!--Application Title-->
             <TextBlock Text="ImportApp" Margin="55,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Foreground="DarkSeaGreen" RenderTransformOrigin="0.598,1.181"></TextBlock>
             <Icon:PackIconMaterial Kind="FileExcel" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30 4 0 0" Width="20" Height="20" Foreground="DarkSeaGreen"/>
+            <Button HorizontalAlignment="Right" Width="100" Style="{StaticResource discountButton}" Content="Add to discount" Click="addToDiscount_Click"></Button>
+            <Button HorizontalAlignment="Center" Width="100" Style="{StaticResource discountButton}" Content="SelectAll" Click="Button_Click_1"></Button>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Margin="0 0 15 0">
                 <TextBlock Text="Welcome user, you are in dashboard" VerticalAlignment="Center" FontSize="14" Margin="0 0 65 0"/>

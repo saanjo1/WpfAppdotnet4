@@ -33,7 +33,6 @@ namespace WpfApp48
         {
             columns = new ArticleDisplayVM
             {
-                ID = Id.Text,
                 ItemName = itemime.Text,
                 ItemSize = itemsize.Text,
                 BarCode = barcode.Text,

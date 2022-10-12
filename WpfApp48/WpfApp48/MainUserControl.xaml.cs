@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -116,6 +118,34 @@ namespace WpfApp48
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void addToDiscount_Click(object sender, RoutedEventArgs e)
+        {
+            List<ArticleDisplayVM> list = new List<ArticleDisplayVM>();
+            string discName = String.Empty;
+
+            if (dataGridArticle.SelectedItems.Count > 0)
+            {
+                for (int i = 0; i < dataGridArticle.SelectedItems.Count; i++)
+                {
+                    list.Add((ArticleDisplayVM)dataGridArticle.SelectedItems[i]);
+                }
+
+                RuleItems modal = new RuleItems();
+                modal.ShowDialog();
+
+                if (RuleItems.discountName != String.Empty)
+                    discName = RuleItems.discountName;
+
+                _objExcelSer.AddDiscountToArticle(list, discName);
+            }
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            dataGridArticle.SelectAll();
         }
     }
 }

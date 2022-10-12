@@ -118,6 +118,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Translations.resx</DependentUpon>
     </Compile>
+    <Compile Include="RuleItems.xaml.cs">
+      <DependentUpon>RuleItems.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\ExcelDataService.cs" />
     <Compile Include="UserControls\DetailCard.xaml.cs">
       <DependentUpon>DetailCard.xaml</DependentUpon>
@@ -153,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RuleItems.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
