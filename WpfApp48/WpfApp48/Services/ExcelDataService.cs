@@ -130,9 +130,7 @@ namespace WpfApp48.Services
 
             for (int i = 0; i < temp.Count; i++)
             {
-                var id = appContext.RuleItems.Where(x => x.Article_Id == temp[i].ID).FirstOrDefault();
-                if(id == null)
-                {
+
                     RuleItem ruleItem = new RuleItem()
                     {
                         Id = Guid.NewGuid(),
@@ -141,7 +139,6 @@ namespace WpfApp48.Services
                         NewPrice = 0
                     };
                     appContext.RuleItems.Add(ruleItem);
-                }
             }
 
             appContext.SaveChanges();
