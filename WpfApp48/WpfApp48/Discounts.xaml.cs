@@ -44,6 +44,8 @@ namespace WpfApp48
 
             if (viewmodel != null)
                 _objDataService.SaveDiscountToDatabase(viewmodel);
+
+            Close();
         }
 
         private void btnCloseDiscount_Click(object sender, RoutedEventArgs e)
