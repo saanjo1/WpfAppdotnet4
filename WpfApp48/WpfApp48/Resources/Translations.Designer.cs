@@ -140,5 +140,14 @@ namespace WpfApp48.Resources {
                 return ResourceManager.GetString("SelectCommand", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select top 1 * from [DETAILS$].
+        /// </summary>
+        internal static string SelectRowCommand {
+            get {
+                return ResourceManager.GetString("SelectRowCommand", resourceCulture);
+            }
+        }
     }
 }

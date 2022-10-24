@@ -25,17 +25,17 @@
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Margin="0,0,-78,10" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="497" RenderTransformOrigin="0.557,0.444">Odaberi kolone iz fajla koje želiš spasiti u već postojeće tabele u DB</Label>
         <Label Grid.Row="2">Item name:</Label>
-        <TextBox Name="itemime" Grid.Row="2" Grid.Column="1" Margin="0,5,175,5"/>
+        <ComboBox Loaded="WindowLoaded" Name="itemime" Grid.Row="2" Grid.Column="1" Margin="0,5,175,5"/>
         <Label Grid.Row="3">Item size:</Label>
-        <TextBox Name="itemsize" Grid.Row="3" Grid.Column="1" AcceptsReturn="True" Margin="0,5,175,5"/>
+        <ComboBox Loaded="WindowLoaded" Name="itemsize" Grid.Row="3" Grid.Column="1"  Margin="0,5,175,5"/>
         <Label Grid.Row="4">Gender:</Label>
-        <TextBox Name="gender" Grid.Row="4" Grid.Column="1" Margin="0,5,175,5"/>
+        <ComboBox Loaded="WindowLoaded" Name="gender" Grid.Row="4" Grid.Column="1" Margin="0,5,175,5"/>
         <Label Grid.Row="5">Barcode:</Label>
-        <TextBox Name="barcode" Grid.Row="5" Grid.Column="1" Margin="0,5,175,5"/>
+        <ComboBox Loaded="WindowLoaded" Name="barcode" Grid.Row="5" Grid.Column="1" Margin="0,5,175,5"/>
         <Label Grid.Row="6">Price:</Label>
-        <TextBox Name="price" Grid.Row="6" Grid.Column="1" Margin="0,5,175,5"/>
+        <ComboBox Loaded="WindowLoaded" Name="price" Grid.Row="6" Grid.Column="1" Margin="0,5,175,5"/>
         <Label Grid.Row="7">Collection:</Label>
-        <TextBox Name="CollectionCategory" Grid.Row="7" Grid.Column="1" Margin="0,5,175,5"/>
+        <ComboBox Loaded="WindowLoaded" Name="CollectionCategory" Grid.Row="7" Grid.Column="1" Margin="0,5,175,5"/>
         <Button Grid.Row="8" Name="btnSaveData" Click="btnSaveClick" Content="Save" RenderTransformOrigin="-0.34,0.714" Height="21" Margin="19,10,284,-8" VerticalAlignment="Top" Grid.ColumnSpan="2" />
         <Button Grid.Row="8" Name="btnCloseData" Click="closeButton_Click" Content="Close" Margin="94,10,138,-7" Grid.Column="1" RenderTransformOrigin="0.756,0.714" />
     </Grid>

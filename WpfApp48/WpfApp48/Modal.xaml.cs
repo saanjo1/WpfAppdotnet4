@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp48.Services;
 using WpfApp48.ViewModels;
 
 namespace WpfApp48
@@ -21,11 +22,14 @@ namespace WpfApp48
     public partial class Modal : Window
     {
         public static ArticleDisplayVM columns;
-
+        public static ExcelDataService _objDataService;
         public Modal()
         {
             InitializeComponent();
+            _objDataService = new ExcelDataService();
         }
+
+      
 
         private void closeButton_Click(object sender, RoutedEventArgs e) =>
     Close();
@@ -43,6 +47,23 @@ namespace WpfApp48
             
 
             Close();
+        }
+
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            List<string> lista = _objDataService.GetData().Result;
+
+            if (lista != null)
+            {
+                itemime.ItemsSource = lista;
+                itemsize.ItemsSource = lista;
+                gender.ItemsSource = lista;
+                barcode.ItemsSource = lista;
+                price.ItemsSource = lista;
+                CollectionCategory.ItemsSource = lista;
+            }
+            
+
         }
     }
 }

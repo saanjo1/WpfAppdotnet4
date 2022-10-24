@@ -144,4 +144,7 @@
   <data name="SelectCommand" xml:space="preserve">
     <value>select * from [DETAILS$]</value>
   </data>
+  <data name="SelectRowCommand" xml:space="preserve">
+    <value>select top 1 * from [DETAILS$]</value>
+  </data>
 </root>

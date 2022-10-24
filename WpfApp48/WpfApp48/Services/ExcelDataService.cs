@@ -25,7 +25,7 @@ namespace WpfApp48.Services
 
         public ArticleDisplayVM ManageModal(Modal modal)
         {
-            if(Modal.columns == null)
+            if (Modal.columns == null)
             {
                 MessageBox.Show(Translations.MapErrorMessage);
                 return null;
@@ -45,6 +45,41 @@ namespace WpfApp48.Services
 
         }
 
+        public async Task<List<string>> GetData()
+        {
+            var con = Helpers.Extensions.SetOleDbCon(excelFile);
+            conn = new OleDbConnection(con);
+            var lines = new List<string>();
+
+
+            await conn.OpenAsync();
+            Command = new OleDbCommand();
+            Command.Connection = conn;
+            Command.CommandText = Translations.SelectRowCommand;
+
+
+            var Reader = await Command.ExecuteReaderAsync();
+
+            while (Reader.Read())
+            {
+                var fieldCount = Reader.FieldCount;
+
+                var fieldIncrementor = 1;
+                var fields = new List<string>();
+                while (fieldCount >= fieldIncrementor)
+                {
+                        fields.Add(Reader[fieldIncrementor - 1].ToString());
+                    fieldIncrementor++;
+                }
+
+                lines = fields;
+            }
+
+            Reader.Close();
+            conn.Close();
+
+            return lines;
+        }
 
         public DiscountDisplayVM ManageDiscount(Discounts modal)
         {
@@ -73,45 +108,47 @@ namespace WpfApp48.Services
         {
             if (excelFile == null || viewModel == null)
                 return null;
-            
-         
-                try
+
+
+            try
+            {
+                string con =
+      @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + excelFile + ";" +
+      @"Extended Properties='Excel 8.0;HDR=Yes;'";
+                conn = new OleDbConnection(con);
+
+
+                await conn.OpenAsync();
+                Command = new OleDbCommand();
+                Command.Connection = conn;
+                Command.CommandText = Translations.SelectCommand;
+
+
+                var Reader = await Command.ExecuteReaderAsync();
+
+                while (Reader.Read())
                 {
-                    var con = Helpers.Extensions.SetOleDbCon(excelFile);
-                    conn = new OleDbConnection(con);
-
-
-                    await conn.OpenAsync();
-                    Command = new OleDbCommand();
-                    Command.Connection = conn;
-                    Command.CommandText = Translations.SelectCommand;
-
-
-                    var Reader = await Command.ExecuteReaderAsync();
-
-                    while (Reader.Read())
+                    Articles.Add(new ArticleDisplayVM()
                     {
-                        Articles.Add(new ArticleDisplayVM()
-                        {
-                            ID = Guid.NewGuid(),
-                            BarCode = Reader[viewModel.BarCode].ToString(),
-                            ItemName = Reader[viewModel.ItemName].ToString(),
-                            Gender = Reader[viewModel.Gender].ToString(),
-                            CollectionCategory = Reader[viewModel.CollectionCategory].ToString(),
-                            So_Price = Reader[viewModel.So_Price].ToString(),
-                            ItemSize = Reader[viewModel.ItemSize].ToString()
-                        });
-                    }
-
-                    Reader.Close();
-                    conn.Close();
-                }
-                catch (Exception e)
-                {
-                    
+                        ID = Guid.NewGuid(),
+                        BarCode = Reader[viewModel.BarCode].ToString(),
+                        ItemName = Reader[viewModel.ItemName].ToString(),
+                        Gender = Reader[viewModel.Gender].ToString(),
+                        CollectionCategory = Reader[viewModel.CollectionCategory].ToString(),
+                        So_Price = Reader[viewModel.So_Price].ToString(),
+                        ItemSize = Reader[viewModel.ItemSize].ToString()
+                    });
                 }
 
-            if(Articles.Count > 0)
+                Reader.Close();
+                conn.Close();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            if (Articles.Count > 0)
             {
                 MessageBox.Show(Articles.Count + Translations.CountArticlesMessage);
             }
@@ -131,14 +168,14 @@ namespace WpfApp48.Services
             for (int i = 0; i < temp.Count; i++)
             {
 
-                    RuleItem ruleItem = new RuleItem()
-                    {
-                        Id = Guid.NewGuid(),
-                        Article_Id = temp[i].ID,
-                        Rule_Id = disc.Id,
-                        NewPrice = 0
-                    };
-                    appContext.RuleItems.Add(ruleItem);
+                RuleItem ruleItem = new RuleItem()
+                {
+                    Id = Guid.NewGuid(),
+                    Article_Id = temp[i].ID,
+                    Rule_Id = disc.Id,
+                    NewPrice = 0
+                };
+                appContext.RuleItems.Add(ruleItem);
             }
 
             appContext.SaveChanges();
@@ -151,7 +188,7 @@ namespace WpfApp48.Services
 
             if (openFileDialog.ShowDialog() == true)
             {
-                excelFile= openFileDialog.FileName;
+                excelFile = openFileDialog.FileName;
                 return true;
             }
             return false;
