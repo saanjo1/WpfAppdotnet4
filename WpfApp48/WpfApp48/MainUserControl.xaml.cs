@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp48.Modals;
 using WpfApp48.Resources;
 using WpfApp48.Services;
 using WpfApp48.ViewModels;
@@ -39,10 +40,6 @@ namespace WpfApp48
             _objExcelSer = new ExcelDataService();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void uploadFile_Click(object sender, RoutedEventArgs e)
         {
@@ -53,14 +50,24 @@ namespace WpfApp48
 
         private void mapData_Click(object sender, RoutedEventArgs e)
         {
+
             try
             {
-                Modal modal = new Modal();
-                modal.ShowDialog();
 
-                var columnItems = _objExcelSer.ManageModal(modal);
-                if (columnItems != null)
-                 columns = columnItems;
+                ModalSheets modalSheets = new ModalSheets();
+                modalSheets.ShowDialog();
+
+                App.Current.Properties["SheetName"] = _objExcelSer.GetSheetName(modalSheets);
+
+               if(App.Current.Properties["SheetName"] != null)
+                {
+                    Modal modal = new Modal();
+                    modal.ShowDialog();
+
+                    var columnItems = _objExcelSer.ManageModal(modal);
+                    if (columnItems != null)
+                        columns = columnItems;
+                }
 
             }
             catch (Exception ex)

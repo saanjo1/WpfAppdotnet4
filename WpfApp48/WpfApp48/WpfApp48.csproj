@@ -96,8 +96,11 @@
     <Compile Include="MainUserControl.xaml.cs">
       <DependentUpon>MainUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modal.xaml.cs">
+    <Compile Include="Modals\Modal.xaml.cs">
       <DependentUpon>Modal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modals\ModalSheets.xaml.cs">
+      <DependentUpon>ModalSheets.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Articles_yedek.cs" />
     <Compile Include="Models\Rule.cs" />
@@ -155,7 +158,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modal.xaml">
+    <Page Include="Modals\Modal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\ModalSheets.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

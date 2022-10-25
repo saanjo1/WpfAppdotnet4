@@ -3,12 +3,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Data.OleDb;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WpfApp48.Modals;
 using WpfApp48.Resources;
 using WpfApp48.ViewModels;
 
@@ -45,6 +48,18 @@ namespace WpfApp48.Services
 
         }
 
+        public string GetSheetName(ModalSheets modal)
+        {
+            if (ModalSheets.sheetName == null)
+            {
+                MessageBox.Show(Translations.MapErrorMessage);
+                return null;
+            }
+
+            var sheetName = ModalSheets.sheetName;
+            return sheetName;
+        }
+
         public async Task<List<string>> GetData()
         {
             var con = Helpers.Extensions.SetOleDbCon(excelFile);
@@ -55,7 +70,7 @@ namespace WpfApp48.Services
             await conn.OpenAsync();
             Command = new OleDbCommand();
             Command.Connection = conn;
-            Command.CommandText = Translations.SelectRowCommand;
+            Command.CommandText = "select top 1 * from ["+ App.Current.Properties["SheetName"]+ "]";
 
 
             var Reader = await Command.ExecuteReaderAsync();
@@ -121,7 +136,7 @@ namespace WpfApp48.Services
                 await conn.OpenAsync();
                 Command = new OleDbCommand();
                 Command.Connection = conn;
-                Command.CommandText = Translations.SelectCommand;
+                Command.CommandText = "select * from [" + App.Current.Properties["SheetName"] + "]";
 
 
                 var Reader = await Command.ExecuteReaderAsync();
@@ -242,6 +257,40 @@ namespace WpfApp48.Services
 
             appContext.Rules.Add(rule);
             appContext.SaveChanges();
+        }
+
+        public List<string> ListSheetInExcel()
+        {
+            OleDbConnectionStringBuilder sbConnection = new OleDbConnectionStringBuilder();
+            String strExtendedProperties = String.Empty;
+            sbConnection.DataSource = excelFile;
+            if (Path.GetExtension(excelFile).Equals(".xls"))//for 97-03 Excel file
+            {
+                sbConnection.Provider = "Microsoft.Jet.OLEDB.4.0";
+                strExtendedProperties = "Excel 8.0;HDR=Yes;IMEX=1";//HDR=ColumnHeader,IMEX=InterMixed
+            }
+            else if (Path.GetExtension(excelFile).Equals(".xlsx"))  //for 2007 Excel file
+            {
+                sbConnection.Provider = "Microsoft.ACE.OLEDB.12.0";
+                strExtendedProperties = "Excel 12.0;HDR=Yes;IMEX=1";
+            }
+            sbConnection.Add("Extended Properties", strExtendedProperties);
+
+            List<string> listSheet = new List<string>();
+            using (OleDbConnection conn = new OleDbConnection(sbConnection.ToString()))
+            {
+                conn.Open();
+                DataTable dtSheet = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+
+                foreach (DataRow drSheet in dtSheet.Rows)
+                {
+                    if (drSheet["TABLE_NAME"].ToString().Contains("$"))//checks whether row contains '_xlnm#_FilterDatabase' or sheet name(i.e. sheet name always ends with $ sign)
+                    {
+                        listSheet.Add(drSheet["TABLE_NAME"].ToString());
+                    }
+                }
+            }
+            return listSheet;
         }
     }
 }
