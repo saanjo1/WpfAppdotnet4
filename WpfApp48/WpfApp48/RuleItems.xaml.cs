@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp48.Services;
 
 namespace WpfApp48
 {
@@ -21,9 +22,11 @@ namespace WpfApp48
     {
 
         public static string discountName = String.Empty;
+        public static ExcelDataService _objDataService;
         public RuleItems()
         {
             InitializeComponent();
+            _objDataService = new ExcelDataService();
         }
 
         private void btnCloseItem_Click(object sender, RoutedEventArgs e)
@@ -34,8 +37,17 @@ namespace WpfApp48
         private void btnSaveItem_Click(object sender, RoutedEventArgs e)
         {
             discountName = discount.Text;
-
             Close();
+        }
+
+        private void discount_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<string> discountList = _objDataService.GetDiscountList();
+
+            if (discountList != null)
+            {
+                discount.ItemsSource = discountList;
+            }
         }
     }
 }

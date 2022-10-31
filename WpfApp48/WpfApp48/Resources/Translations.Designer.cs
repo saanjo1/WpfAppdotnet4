@@ -142,6 +142,15 @@ namespace WpfApp48.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to select * from Rules.
+        /// </summary>
+        internal static string SelectDiscounts {
+            get {
+                return ResourceManager.GetString("SelectDiscounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to select top 1 * from [DETAILS$].
         /// </summary>
         internal static string SelectRowCommand {

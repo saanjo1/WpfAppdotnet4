@@ -102,6 +102,8 @@ namespace WpfApp48
                 {
                     MessageBox.Show(Translations.NoArticlesAdded);
                 }
+                dataGridArticle.Visibility = Visibility.Hidden;
+
             }
             catch (Exception ex)
             {

@@ -179,22 +179,29 @@ namespace WpfApp48.Services
         {
             Rule disc = appContext.Rules.Where(x => x.Type == discName).FirstOrDefault();
 
-
-            for (int i = 0; i < temp.Count; i++)
+            if(disc != null)
             {
-
-                RuleItem ruleItem = new RuleItem()
+                for (int i = 0; i < temp.Count; i++)
                 {
-                    Id = Guid.NewGuid(),
-                    Article_Id = temp[i].ID,
-                    Rule_Id = disc.Id,
-                    NewPrice = 0
-                };
-                appContext.RuleItems.Add(ruleItem);
-            }
 
-            appContext.SaveChanges();
-            MessageBox.Show("Successfully saved.");
+                    RuleItem ruleItem = new RuleItem()
+                    {
+                        Id = Guid.NewGuid(),
+                        Article_Id = temp[i].ID,
+                        Rule_Id = disc.Id,
+                        NewPrice = 0
+                    };
+                    appContext.RuleItems.Add(ruleItem);
+                }
+
+                appContext.SaveChanges();
+                MessageBox.Show("Successfully saved.");
+            }
+            else
+            {
+                MessageBox.Show("Discount is not selected. Try Again.");
+            }
+            
         }
 
         public bool OpenDialog()
@@ -238,6 +245,7 @@ namespace WpfApp48.Services
 
             }
             appContext.SaveChanges();
+            Articles.Clear();
             return counter;
         }
 
@@ -291,6 +299,18 @@ namespace WpfApp48.Services
                 }
             }
             return listSheet;
+        }
+
+
+        public List<string> GetDiscountList()
+        {
+            var tempList = new List<string>();
+            foreach(var item in appContext.Rules)
+            {
+                tempList.Add(item.Name);
+            }
+
+            return tempList;
         }
     }
 }
