@@ -87,7 +87,7 @@ namespace WpfApp48.Helpers
         {
             string con =
       @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + excelfile + ";" +
-      @"Extended Properties='Excel 8.0;HDR=No;'";
+      @"Extended Properties='Excel 8.0;HDR=No;IMEX=1'";
             return con;
         }
 

@@ -83,7 +83,8 @@ namespace WpfApp48.Services
                 var fields = new List<string>();
                 while (fieldCount >= fieldIncrementor)
                 {
-                        fields.Add(Reader[fieldIncrementor - 1].ToString());
+                    string test = Reader[fieldIncrementor - 1].ToString();
+                    fields.Add(test);
                     fieldIncrementor++;
                 }
 
@@ -123,7 +124,6 @@ namespace WpfApp48.Services
         {
             if (excelFile == null || viewModel == null)
                 return null;
-
 
             try
             {
