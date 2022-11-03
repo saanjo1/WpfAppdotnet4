@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,7 @@ namespace WpfApp48
         {
             InitializeComponent();
             dataGridArticle.Visibility = Visibility.Hidden;
+            datagrid1.Visibility = Visibility.Hidden;
             _objExcelSer = new ExcelDataService();
         }
 
@@ -92,6 +94,7 @@ namespace WpfApp48
 
         private void importToDatabase_Click(object sender, RoutedEventArgs e)
         {
+            datagrid1.Visibility = Visibility.Hidden;
             try
             {
                 dataGridArticle.ItemsSource = _objExcelSer.ReadFromExcel(columns).Result;
@@ -166,9 +169,35 @@ namespace WpfApp48
 
         private void OnDataSelectAll(object sender, RoutedEventArgs e)
         {
-            dataGridArticle.Focus();
-            dataGridArticle.SelectAll();
+            datagrid1.Focus();
+            datagrid1.SelectAll();
         }
 
+        private void showData_Click(object sender, RoutedEventArgs e)
+        {
+            string sql = "SELECT Id, Name, Price, Barcode, ArticleNumber";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Translations.ConfigurationModel))
+                using (SqlCommand cmd = new SqlCommand("select Id, Name, Price, BarCode from Articles", conn))
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        DataTable dataTable = new DataTable();
+                        dataTable.Load(reader);
+                        datagrid1.ItemsSource = dataTable.DefaultView;
+                    }
+                }
+
+                datagrid1.Visibility = Visibility.Visible;
+                dataGridArticle.Visibility = Visibility.Hidden;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

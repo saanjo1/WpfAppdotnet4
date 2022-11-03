@@ -48,9 +48,9 @@
                 </StackPanel>
             </Border>
             <Border Grid.Row="2" Grid.Column="0">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel>
                     <DataGrid x:Name="dataGridArticle" AutoGenerateColumns="False" ColumnWidth="*" RowBackground="WhiteSmoke"  
-                  Background="white" Width="843" Margin="5,3,0,0">
+                  Background="white" Width="843" Margin="6,3,1,0" Height="199">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="90"/>
                             <DataGridTextColumn Header="ItemName" Binding="{Binding ItemName}" Width="220"/>
@@ -61,14 +61,16 @@
                             <DataGridTextColumn Header="Collection" Binding="{Binding CollectionCategory}" Width="100"/>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <DataGrid x:Name="datagrid1" ColumnWidth="*" Width="852" Margin="0,26,-2,0" Height="187" RenderTransformOrigin="0.486,-0.465"/>
                 </StackPanel>
+               
             </Border>
             <Border Background="SeaGreen" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="136" VerticalAlignment="Top" Width="397" Margin="4,433,-1,0" Grid.Row="1" Grid.Column="1">
                 <StackPanel>
                     <TextBlock Foreground="#ffffff" FontWeight="SemiBold" TextAlignment="Center" FontSize="12" Text="Modify existing data" Margin="0 0 15 0"/>
                     <TextBlock TextWrapping="Wrap" Foreground="#E6E8EC" FontSize="13" Margin="40 15 40 20" LineHeight="24" FontWeight="Light" TextAlignment="Center" Text="Manage already imported data (change discounts, show data etc.)"/>
                     <StackPanel Orientation="Horizontal">
-                        <Button Background="AliceBlue" Content="Show data from DB" Width="197"/>
+                        <Button Name="showData" Background="AliceBlue" Content="Show data from DB" Click="showData_Click" Width="197"/>
                         <Button Background="AliceBlue" Content="Change discounts" Width="196"/>
                     </StackPanel>
 

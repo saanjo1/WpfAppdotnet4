@@ -171,6 +171,8 @@ namespace WpfApp48.Services
             else
             {
                 MessageBox.Show(Translations.NoDataMessage);
+                
+                
             }
 
             return Articles;

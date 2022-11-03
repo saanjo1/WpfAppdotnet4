@@ -62,8 +62,23 @@ namespace WpfApp48
                 price.ItemsSource = lista;
                 CollectionCategory.ItemsSource = lista;
             }
-            
 
+            for (int i = 0; i < lista.Count; i++)
+            {
+                if (lista[i].Contains("SO_PRICE"))
+                    price.SelectedItem = lista[i];
+                if (lista[i].Contains("GENDER"))
+                    gender.SelectedItem = lista[i];
+                if (lista[i].Contains("BARCODE"))
+                    barcode.SelectedItem = lista[i];
+                if (lista[i].Contains("ITEM_SIZE"))
+                    itemsize.SelectedItem = lista[i];
+                if (lista[i].Contains("SKU"))
+                    itemime.SelectedItem = lista[i];
+                if (lista[i].Contains("SEASON"))
+                    CollectionCategory.SelectedItem = lista[i];
+
+            }
         }
     }
 }
