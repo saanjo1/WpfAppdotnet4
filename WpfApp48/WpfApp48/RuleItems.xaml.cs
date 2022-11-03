@@ -42,7 +42,7 @@ namespace WpfApp48
 
         private void discount_Loaded(object sender, RoutedEventArgs e)
         {
-            List<string> discountList = _objDataService.GetDiscountList();
+            List<string> discountList = _objDataService.GetDiscountList().Result;
 
             if (discountList != null)
             {

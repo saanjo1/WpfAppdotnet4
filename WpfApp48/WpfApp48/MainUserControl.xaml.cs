@@ -46,7 +46,7 @@ namespace WpfApp48
 
         private void uploadFile_Click(object sender, RoutedEventArgs e)
         {
-            bool excelFile = _objExcelSer.OpenDialog();
+            bool excelFile = _objExcelSer.OpenDialog().Result;
             if (!excelFile)
                 MessageBox.Show("Try again.");
         }
@@ -67,7 +67,7 @@ namespace WpfApp48
                     Modal modal = new Modal();
                     modal.ShowDialog();
 
-                    var columnItems = _objExcelSer.ManageModal(modal);
+                    var columnItems = _objExcelSer.ManageModal(modal).Result;
                     if (columnItems != null)
                         columns = columnItems;
                 }
@@ -135,7 +135,7 @@ namespace WpfApp48
 
                 var discountItems = _objExcelSer.ManageDiscount(modal);
                 if (discountItems != null)
-                    discounts = discountItems;
+                    discounts = discountItems.Result;
 
             }
             catch (Exception ex)

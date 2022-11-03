@@ -27,7 +27,7 @@ namespace WpfApp48.Services
         public static string excelFile = null;
 
 
-        public ArticleDisplayVM ManageModal(Modal modal)
+        public async Task<ArticleDisplayVM> ManageModal(Modal modal)
         {
             if (Modal.columns == null)
             {
@@ -45,7 +45,7 @@ namespace WpfApp48.Services
                 BarCode = Modal.columns.BarCode,
                 CollectionCategory = Modal.columns.CollectionCategory
             };
-            return columns;
+            return await Task.FromResult(columns);
 
         }
 
@@ -95,10 +95,10 @@ namespace WpfApp48.Services
             Reader.Close();
             conn.Close();
 
-            return lines;
+            return await Task.FromResult(lines);
         }
 
-        public DiscountDisplayVM ManageDiscount(Discounts modal)
+        public async Task<DiscountDisplayVM> ManageDiscount(Discounts modal)
         {
             if (Discounts.viewmodel == null)
             {
@@ -116,7 +116,7 @@ namespace WpfApp48.Services
                 validFrom = Discounts.viewmodel.validFrom,
                 validTo = Discounts.viewmodel.validTo
             };
-            return rule;
+            return await Task.FromResult(rule);
 
 
         }
@@ -209,19 +209,19 @@ namespace WpfApp48.Services
             
         }
 
-        public bool OpenDialog()
+        public async Task<bool> OpenDialog()
         {
             OpenFileDialog openFileDialog = Helpers.Extensions.CreateOFDialog();
 
             if (openFileDialog.ShowDialog() == true)
             {
                 excelFile = openFileDialog.FileName;
-                return true;
+                return await Task.FromResult(true);
             }
-            return false;
+            return await Task.FromResult(false);
         }
 
-        public Task<int> ImportToDatabase()
+        public async Task<int> ImportToDatabase()
         {
             var culture = new CultureInfo(Translations.CultureInfo);
             var counter = 0;
@@ -250,7 +250,7 @@ namespace WpfApp48.Services
 
             }
             appContext.SaveChanges();
-            return Task.FromResult(counter);
+            return await Task.FromResult(counter);
         }
 
         public void SaveDiscountToDatabase(DiscountDisplayVM viewModel)
@@ -271,7 +271,7 @@ namespace WpfApp48.Services
             appContext.SaveChanges();
         }
 
-        public List<string> ListSheetInExcel()
+        public async Task<List<string>> ListSheetInExcel()
         {
             OleDbConnectionStringBuilder sbConnection = new OleDbConnectionStringBuilder();
             String strExtendedProperties = String.Empty;
@@ -291,7 +291,7 @@ namespace WpfApp48.Services
             List<string> listSheet = new List<string>();
             using (OleDbConnection conn = new OleDbConnection(sbConnection.ToString()))
             {
-                conn.Open();
+               await conn.OpenAsync();
                 DataTable dtSheet = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
 
                 foreach (DataRow drSheet in dtSheet.Rows)
@@ -302,11 +302,11 @@ namespace WpfApp48.Services
                     }
                 }
             }
-            return listSheet;
+            return await Task.FromResult(listSheet);
         }
 
 
-        public List<string> GetDiscountList()
+        public async Task<List<string>> GetDiscountList()
         {
             var tempList = new List<string>();
             foreach(var item in appContext.Rules)
@@ -314,7 +314,7 @@ namespace WpfApp48.Services
                 tempList.Add(item.Name);
             }
 
-            return tempList;
+            return await Task.FromResult(tempList);
         }
 
         

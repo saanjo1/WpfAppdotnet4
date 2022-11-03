@@ -42,7 +42,7 @@ namespace WpfApp48.Modals
 
         private void cmbSheet_Loaded(object sender, RoutedEventArgs e)
         {
-            List<string> sheetList = _objDataService.ListSheetInExcel();
+            List<string> sheetList = _objDataService.ListSheetInExcel().Result;
 
             if (sheetList != null)
             {
