@@ -45,7 +45,11 @@ namespace WpfApp48.Modals
             List<string> sheetList = _objDataService.ListSheetInExcel();
 
             if (sheetList != null)
+            {
                 cmbSheet.ItemsSource = sheetList;
+                cmbSheet.SelectedItem = sheetList[0];
+            }
+              
         }
     }
 }

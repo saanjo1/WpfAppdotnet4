@@ -144,6 +144,9 @@
   <data name="OpenDialogTitle" xml:space="preserve">
     <value>Browse excel files</value>
   </data>
+  <data name="PleaseSelectSheet" xml:space="preserve">
+    <value>Please select sheet and try again.</value>
+  </data>
   <data name="SelectCommand" xml:space="preserve">
     <value>select * from [DETAILS$]</value>
   </data>

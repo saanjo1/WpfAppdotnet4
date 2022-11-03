@@ -142,6 +142,15 @@ namespace WpfApp48.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select sheet and try again..
+        /// </summary>
+        internal static string PleaseSelectSheet {
+            get {
+                return ResourceManager.GetString("PleaseSelectSheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to select * from [DETAILS$].
         /// </summary>
         internal static string SelectCommand {

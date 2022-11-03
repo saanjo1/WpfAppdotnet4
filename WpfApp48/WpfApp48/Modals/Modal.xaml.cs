@@ -63,6 +63,7 @@ namespace WpfApp48
                 CollectionCategory.ItemsSource = lista;
             }
 
+
             for (int i = 0; i < lista.Count; i++)
             {
                 if (lista[i].Contains("SO_PRICE"))
