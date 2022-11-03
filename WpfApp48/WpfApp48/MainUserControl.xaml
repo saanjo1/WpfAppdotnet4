@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp48" xmlns:uc="clr-namespace:WpfApp48.UserControls" xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
-              d:DesignHeight="1200" d:DesignWidth="1200"
+              d:DesignHeight="1200" d:DesignWidth="1250"
     Background="Transparent">
     <Border CornerRadius="7" Background="#ffffff">
         <Grid>
@@ -23,14 +23,14 @@
             <TextBlock Text="ImportApp" Margin="55,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Foreground="DarkSeaGreen" RenderTransformOrigin="0.598,1.181"></TextBlock>
             <Icon:PackIconMaterial Kind="FileExcel" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30 4 0 0" Width="20" Height="20" Foreground="DarkSeaGreen"/>
             <Button HorizontalAlignment="Right" Width="100" Style="{StaticResource discountButton}" Content="Add to discount" Click="addToDiscount_Click"></Button>
-            <Button HorizontalAlignment="Center" Width="107" Style="{StaticResource discountButton}" Content="Select All" Click="Button_Click_1" Margin="574,2,119,1"></Button>
+            <Button HorizontalAlignment="Center" Width="107" Style="{StaticResource discountButton}" Content="Select All" Click="OnDataSelectAll" Margin="577,2,116,2"></Button>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Margin="0 0 15 0">
                 <TextBlock Text="Welcome user, you are in dashboard" VerticalAlignment="Center" FontSize="14" Margin="0 0 65 0"/>
             </StackPanel>
 
             <Border Grid.Row="1" Grid.Column="1" Background="DarkSeaGreen" CornerRadius="0 0 5 0">
-                <StackPanel Margin="60 0 10 0">
+                <StackPanel Margin="-1,0,10,0">
                     <TextBlock Foreground="#ffffff" FontWeight="SemiBold" TextAlignment="Center" FontSize="12" Text="Application details" Margin="0 0 15 0"/>
                     <TextBlock TextWrapping="Wrap" Foreground="#E6E8EC" FontSize="13" Margin="40 15 40 20" LineHeight="24" FontWeight="Light" TextAlignment="Center" Text="Please follow the instructions below to import or export your data"/>
                     <Button Style="{StaticResource buttonCard}" Click="uploadFile_Click">
@@ -39,21 +39,18 @@
                     <Button Style="{StaticResource buttonCard}" Click="mapData_Click">
                         <uc:DetailCard Title="Map data" Number="2" Image="/Images/eMap.png" IsActive="False"/>
                     </Button>
-                    <Button Style="{StaticResource buttonCard}" Click="displayData_Click">
-                        <uc:DetailCard Title="Show data in table" Number="3" Image="/Images/eDisplay.png" IsActive="False"/>
-                    </Button>
                     <Button Style="{StaticResource buttonCard}" Click="importToDatabase_Click">
-                        <uc:DetailCard Title="Import to database" Number="4" Image="/Images/eDatabase.png" IsActive="False"/>
+                        <uc:DetailCard Title="Import to database" Number="3" Image="/Images/eDatabase.png" IsActive="False"/>
                     </Button>
                     <Button Style="{StaticResource buttonCard}" Click="generateDiscount_Click">
-                        <uc:DetailCard Title="Generate new discount" Number="5" Image="/Images/eDiscount.png" IsActive="False"/>
+                        <uc:DetailCard Title="Generate new discount" Number="4" Image="/Images/eDiscount.png" IsActive="False"/>
                     </Button>
                 </StackPanel>
             </Border>
             <Border Grid.Row="2" Grid.Column="0">
                 <StackPanel Orientation="Horizontal">
                     <DataGrid x:Name="dataGridArticle" AutoGenerateColumns="False" ColumnWidth="*" RowBackground="WhiteSmoke"  
-                  Background="white" Width="800" Margin="5,6,0,0">
+                  Background="white" Width="843" Margin="5,3,0,0">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="90"/>
                             <DataGridTextColumn Header="ItemName" Binding="{Binding ItemName}" Width="220"/>
@@ -66,6 +63,19 @@
                     </DataGrid>
                 </StackPanel>
             </Border>
+            <Border Background="SeaGreen" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="136" VerticalAlignment="Top" Width="397" Margin="4,433,-1,0" Grid.Row="1" Grid.Column="1">
+                <StackPanel>
+                    <TextBlock Foreground="#ffffff" FontWeight="SemiBold" TextAlignment="Center" FontSize="12" Text="Modify existing data" Margin="0 0 15 0"/>
+                    <TextBlock TextWrapping="Wrap" Foreground="#E6E8EC" FontSize="13" Margin="40 15 40 20" LineHeight="24" FontWeight="Light" TextAlignment="Center" Text="Manage already imported data (change discounts, show data etc.)"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Background="AliceBlue" Content="Show data from DB" Width="197"/>
+                        <Button Background="AliceBlue" Content="Change discounts" Width="196"/>
+                    </StackPanel>
+
+                </StackPanel>
+
+            </Border>
+
         </Grid>
 
     </Border>

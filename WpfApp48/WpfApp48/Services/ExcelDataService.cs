@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.OleDb;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -177,19 +178,21 @@ namespace WpfApp48.Services
 
         public void AddDiscountToArticle(List<ArticleDisplayVM> temp, string discName)
         {
-            Rule disc = appContext.Rules.Where(x => x.Type == discName).FirstOrDefault();
+            Rule disc = appContext.Rules.Where(x => x.Name == discName).FirstOrDefault();
 
             if(disc != null)
             {
+                var discPrice = Int32.TryParse(disc.Type, out int rulePrice);
                 for (int i = 0; i < temp.Count; i++)
                 {
+                    var oldPrice = Int32.TryParse(temp[i].So_Price, out int res);
 
                     RuleItem ruleItem = new RuleItem()
                     {
                         Id = Guid.NewGuid(),
                         Article_Id = temp[i].ID,
                         Rule_Id = disc.Id,
-                        NewPrice = 0
+                        NewPrice = res - (rulePrice * res % 100)
                     };
                     appContext.RuleItems.Add(ruleItem);
                 }
@@ -216,7 +219,7 @@ namespace WpfApp48.Services
             return false;
         }
 
-        public int ImportToDatabase()
+        public Task<int> ImportToDatabase()
         {
             var culture = new CultureInfo(Translations.CultureInfo);
             var counter = 0;
@@ -245,8 +248,7 @@ namespace WpfApp48.Services
 
             }
             appContext.SaveChanges();
-            Articles.Clear();
-            return counter;
+            return Task.FromResult(counter);
         }
 
         public void SaveDiscountToDatabase(DiscountDisplayVM viewModel)
@@ -312,6 +314,8 @@ namespace WpfApp48.Services
 
             return tempList;
         }
+
+        
     }
 }
 

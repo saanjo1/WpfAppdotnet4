@@ -70,7 +70,16 @@ namespace WpfApp48.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  data selected. Press button for importing in database . . ..
+        ///   Looks up a localized string similar to data source=.;initial catalog=possector;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework.
+        /// </summary>
+        internal static string ConfigurationModel {
+            get {
+                return ResourceManager.GetString("ConfigurationModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  data selected. Press OK to proceed....
         /// </summary>
         internal static string CountArticlesMessage {
             get {

@@ -120,8 +120,11 @@
   <data name="AddedArticlesMessage" xml:space="preserve">
     <value> articles added to database.</value>
   </data>
+  <data name="ConfigurationModel" xml:space="preserve">
+    <value>data source=.;initial catalog=possector;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework</value>
+  </data>
   <data name="CountArticlesMessage" xml:space="preserve">
-    <value> data selected. Press button for importing in database . . .</value>
+    <value> data selected. Press OK to proceed...</value>
   </data>
   <data name="CultureInfo" xml:space="preserve">
     <value>en-US</value>

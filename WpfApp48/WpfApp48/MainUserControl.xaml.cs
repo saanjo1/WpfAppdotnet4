@@ -24,6 +24,7 @@ namespace WpfApp48
     /// <summary>
     /// Interaction logic for MainUserControl.xaml
     /// </summary>
+    /// 80582710408070
     public partial class MainUserControl : UserControl
     {
         public static ExcelDataService _objExcelSer;
@@ -93,21 +94,32 @@ namespace WpfApp48
         {
             try
             {
-                var counter = _objExcelSer.ImportToDatabase();
-                if (counter > 0)
-                {
-                    MessageBox.Show(counter + Translations.AddedArticlesMessage);
-                }
-                else
-                {
-                    MessageBox.Show(Translations.NoArticlesAdded);
-                }
-                dataGridArticle.Visibility = Visibility.Hidden;
-
+                dataGridArticle.ItemsSource = _objExcelSer.ReadFromExcel(columns).Result;
+                dataGridArticle.Visibility = Visibility.Visible;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+
+            if(dataGridArticle.ItemsSource != null)
+            {
+                try
+                {
+                    var counter = _objExcelSer.ImportToDatabase().Result;
+                    if (counter > 0)
+                    {
+                        MessageBox.Show(counter + Translations.AddedArticlesMessage);
+                    }
+                    else
+                    {
+                        MessageBox.Show(Translations.NoArticlesAdded);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -152,9 +164,11 @@ namespace WpfApp48
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void OnDataSelectAll(object sender, RoutedEventArgs e)
         {
+            dataGridArticle.Focus();
             dataGridArticle.SelectAll();
         }
+
     }
 }
