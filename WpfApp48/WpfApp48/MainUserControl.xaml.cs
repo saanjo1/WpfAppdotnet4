@@ -169,8 +169,20 @@ namespace WpfApp48
 
         private void OnDataSelectAll(object sender, RoutedEventArgs e)
         {
-            datagrid1.Focus();
-            datagrid1.SelectAll();
+            if(datagrid1.Visibility == Visibility.Visible)
+            {
+                datagrid1.Focus();
+                datagrid1.SelectAll();
+
+                datagrid1.CanUserAddRows = false;
+            }
+
+            if(dataGridArticle.Visibility == Visibility.Visible)
+            {
+                dataGridArticle.Focus();
+                dataGridArticle.SelectAll();
+                dataGridArticle.CanUserAddRows = false;
+            }
         }
 
         private void showData_Click(object sender, RoutedEventArgs e)
